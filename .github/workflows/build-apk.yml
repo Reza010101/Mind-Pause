@@ -32,20 +32,37 @@ jobs:
             ~/.pub-cache
           key: ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.lock') }}
 
-      - name: Install Flutter SDK (manual)
+      - name: Install Flutter SDK (manual, robust)
         run: |
-          set -e
-          # Use a Flutter build with Dart >= 3.9.2 so pub get can resolve
+          set -euo pipefail
+          # Ensure no stale flutter checkout in workspace
+          if [ -d "${{ github.workspace }}/flutter" ]; then
+            echo "Removing existing flutter directory"
+            rm -rf "${{ github.workspace }}/flutter"
+          fi
+          # Install explicit Flutter SDK (contains Dart >= 3.9.2)
           FLUTTER_VERSION="3.35.7"
           FLUTTER_TAR="flutter_linux_${FLUTTER_VERSION}-stable.tar.xz"
-          echo "Downloading Flutter $FLUTTER_VERSION..."
-          wget -q "https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/${FLUTTER_TAR}"
-          echo "Extracting..."
-          tar xf "${FLUTTER_TAR}"
-          echo "Adding to PATH"
+          DOWNLOAD_URL="https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/${FLUTTER_TAR}"
+          echo "Downloading Flutter from: $DOWNLOAD_URL"
+          curl -sSfL "$DOWNLOAD_URL" -o "$FLUTTER_TAR"
+          echo "Extracting $FLUTTER_TAR"
+          tar -xJf "$FLUTTER_TAR"
+          # Ensure extracted dir is named 'flutter'
+          if [ ! -d "flutter" ]; then
+            echo "Expected extracted directory 'flutter' not found" >&2
+            ls -la
+            exit 1
+          fi
+          echo "Adding flutter to PATH"
           echo "${{ github.workspace }}/flutter/bin" >> $GITHUB_PATH
           export PATH="${{ github.workspace }}/flutter/bin:$PATH"
-          flutter --version
+          echo "Flutter version (installed):"
+          flutter --version || true
+          echo "Dart version:"
+          dart --version || true
+          echo "Pre-caching Flutter artifacts"
+          flutter precache --android || true
 
       - name: Accept Android SDK licenses
         run: |
