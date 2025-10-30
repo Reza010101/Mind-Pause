@@ -32,8 +32,11 @@ pluginManagement {
     resolutionStrategy {
         eachPlugin {
             when (requested.id.id) {
-                "com.android.application" -> useModule("com.android.tools.build:gradle:8.1.4")
-                "org.jetbrains.kotlin.android" -> useModule("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.10")
+                // prefer newer AGP/Kotlin that match modern Gradle wrappers and
+                // the runtime environment; adjust if network cannot resolve
+                // these artifacts.
+                "com.android.application" -> useModule("com.android.tools.build:gradle:8.9.1")
+                "org.jetbrains.kotlin.android" -> useModule("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.20")
                 // ensure kotlin-dsl plugin can be resolved when requested by
                 // Flutter's gradle scripts
                 "org.gradle.kotlin.kotlin-dsl" -> useModule("org.gradle.kotlin.kotlin-dsl:org.gradle.kotlin.kotlin-dsl.gradle.plugin:5.1.2")
@@ -41,6 +44,17 @@ pluginManagement {
                 "dev.flutter.flutter-plugin-loader" -> useModule("dev.flutter:flutter-plugin-loader:1.0.0")
             }
         }
+    }
+}
+
+// Ensure all projects use the correct repositories for dependency resolution.
+dependencyResolutionManagement {
+    repositoriesMode.set(org.gradle.api.initialization.resolve.RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        maven { url = uri("https://maven.google.com") }
+        mavenCentral()
+        maven { url = uri("https://plugins.gradle.org/m2/") }
     }
 }
 
