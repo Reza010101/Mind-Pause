@@ -20,15 +20,87 @@ class MomentApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: const DecisionScreen(),
+      home: const AppNavigator(),
       debugShowCheckedModeBanner: false,
     );
   }
 }
 
+// Navigator برای تشخیص صفحه اولیه
+class AppNavigator extends StatefulWidget {
+  const AppNavigator({super.key});
+
+  @override
+  State<AppNavigator> createState() => _AppNavigatorState();
+}
+
+class _AppNavigatorState extends State<AppNavigator> {
+  bool? hasDecision;
+
+  @override
+  void initState() {
+    super.initState();
+    _checkForExistingDecision();
+  }
+
+  Future<void> _checkForExistingDecision() async {
+    final prefs = await SharedPreferences.getInstance();
+    final decision = prefs.getString('user_decision');
+    setState(() {
+      hasDecision = decision != null && decision.isNotEmpty;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (hasDecision == null) {
+      // در حال بررسی
+      return const Scaffold(
+        backgroundColor: Colors.teal,
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(Icons.psychology, size: 80, color: Colors.white),
+              SizedBox(height: 20),
+              Text(
+                'جدا از ذهن',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+              SizedBox(height: 20),
+              CircularProgressIndicator(color: Colors.white),
+            ],
+          ),
+        ),
+      );
+    }
+
+    if (hasDecision!) {
+      return const HomeScreen();
+    } else {
+      return DecisionScreen(
+        onDecisionSaved: () {
+          setState(() {
+            hasDecision = true;
+          });
+        },
+      );
+    }
+  }
+}
+
 // صفحه ثبت تصمیم
 class DecisionScreen extends StatefulWidget {
-  const DecisionScreen({super.key});
+  final VoidCallback? onDecisionSaved;
+  
+  const DecisionScreen({
+    super.key,
+    this.onDecisionSaved,
+  });
 
   @override
   State<DecisionScreen> createState() => _DecisionScreenState();
@@ -62,10 +134,15 @@ class _DecisionScreenState extends State<DecisionScreen> {
       
       _showSnackBar('تصمیم شما ثبت شد!');
       
-      // رفتن به صفحه اصلی
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const HomeScreen()),
-      );
+      // اطلاع دادن به AppNavigator
+      if (widget.onDecisionSaved != null) {
+        widget.onDecisionSaved!();
+      } else {
+        // اگر callback نباشه، مستقیماً برو به HomeScreen
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => const HomeScreen()),
+        );
+      }
     } catch (e) {
       _showSnackBar('خطا در ذخیره‌سازی');
     } finally {
