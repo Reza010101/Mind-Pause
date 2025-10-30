@@ -35,7 +35,8 @@ jobs:
       - name: Install Flutter SDK (manual)
         run: |
           set -e
-          FLUTTER_VERSION="3.10.5"
+          # Use a Flutter build with Dart >= 3.9.2 so pub get can resolve
+          FLUTTER_VERSION="3.35.7"
           FLUTTER_TAR="flutter_linux_${FLUTTER_VERSION}-stable.tar.xz"
           echo "Downloading Flutter $FLUTTER_VERSION..."
           wget -q "https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/${FLUTTER_TAR}"
@@ -45,6 +46,12 @@ jobs:
           echo "${{ github.workspace }}/flutter/bin" >> $GITHUB_PATH
           export PATH="${{ github.workspace }}/flutter/bin:$PATH"
           flutter --version
+
+      - name: Accept Android SDK licenses
+        run: |
+          set -e
+          # Accept Android licenses non-interactively to allow builds on runner
+          yes | flutter doctor --android-licenses || true
 
       - name: Network diagnostics
         run: |
