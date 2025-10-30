@@ -14,10 +14,14 @@ pluginManagement {
         // Google Maven URL as a fallback for environments with repository
         // resolution issues.
         google()
+        // explicit Google Maven path used by some tools
+        maven { url = uri("https://dl.google.com/dl/android/maven2/") }
         maven { url = uri("https://maven.google.com") }
         // Gradle Plugin Portal as maven repository (helps resolving kotlin-dsl and
         // other plugins in some network/proxy environments)
         maven { url = uri("https://plugins.gradle.org/m2/") }
+        // Maven Central (explicit central host)
+        maven { url = uri("https://repo1.maven.org/maven2/") }
         mavenCentral()
         gradlePluginPortal()
     }
