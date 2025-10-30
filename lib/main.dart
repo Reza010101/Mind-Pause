@@ -12,7 +12,7 @@ class MomentApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'مکث - لحظه‌ای برای تصمیم',
+      title: 'جدا از ذهن',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
           seedColor: Colors.teal,
@@ -94,7 +94,7 @@ class _DecisionScreenState extends State<DecisionScreen> {
               const Icon(Icons.psychology, size: 80, color: Colors.teal),
               const SizedBox(height: 24),
               const Text(
-                'مکث',
+                'جدا از ذهن',
                 style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: Colors.teal),
               ),
               const SizedBox(height: 48),
@@ -171,7 +171,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: Colors.teal.shade50,
       appBar: AppBar(
-        title: const Text('مکث'),
+        title: const Text('جدا از ذهن'),
         backgroundColor: Colors.teal,
         foregroundColor: Colors.white,
       ),

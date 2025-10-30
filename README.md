@@ -1,16 +1,36 @@
-# ver01
+# جدا از ذهن 🧠✨
 
-A new Flutter project.
+**اپلیکیشن کمک به ترک عادت با فلسفه مکث آگاهانه**
 
-## Getting Started
+## 🎯 هدف اپلیکیشن
 
-This project is a starting point for a Flutter application.
+این اپ نه فقط ابزار ترک سیگاره، بلکه یه «فضای مکث» برای مواجهه‌ی جدی با ذهن هوس‌سازه. این اپ نه نصیحت می‌کنه، نه قضاوت؛ فقط کمک می‌کنه کاربر لحظه‌ای تأخیر بندازه بین هوس و عمل.
 
-A few resources to get you started if this is your first Flutter project:
+## 🧠 فلسفه
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+**عادت = چرخه‌ی چهار مرحله‌ای:** محرک → هوس ذهنی → عمل → پاداش
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+**هدف:** قطع این چرخه با ایجاد «مکث آگاهانه»
+
+**اصل کلیدی:** ذهن در لحظه‌ی هوس فعال می‌شه و زر زر می‌کنه؛ مذاکره با ذهن = باخت
+
+## ✨ امکانات
+
+- 📝 **ثبت تصمیم اولیه:** کاربر تصمیمش رو می‌نویسه
+- ⏰ **تایمر ۶۰ ثانیه:** مکث آگاهانه با پیام‌های هدایت‌گر
+- 🎯 **بدون قضاوت:** اپ هیچ قضاوتی نمی‌کنه
+- 📊 **ثبت پیروزی‌ها:** هر مقاومت موفق ثبت می‌شه
+- 📅 **آمار روزانه:** نمایش پیشرفت
+
+## 🛠️ ساخته شده با
+
+- **Flutter** - Framework UI
+- **Dart** - زبان برنامه‌نویسی
+- **SharedPreferences** - ذخیره‌سازی محلی
+
+## 📱 نصب و اجرا
+
+```bash
+flutter pub get
+flutter run
+```
