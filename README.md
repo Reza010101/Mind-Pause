@@ -1,5 +1,6 @@
-# جدا از ذهن 🧠✨
+# Mind-Pause / جدا از ذهن 🧠✨
 
+**A mindful habit-breaking app based on conscious pause philosophy**  
 **اپلیکیشن کمک به ترک عادت با فلسفه مکث آگاهانه**
 
 ## 🎯 هدف اپلیکیشن
@@ -22,15 +23,37 @@
 - 📊 **ثبت پیروزی‌ها:** هر مقاومت موفق ثبت می‌شه
 - 📅 **آمار روزانه:** نمایش پیشرفت
 
-## 🛠️ ساخته شده با
+## 🛠️ ساخته شده با / Built With
 
-- **Flutter** - Framework UI
-- **Dart** - زبان برنامه‌نویسی
-- **SharedPreferences** - ذخیره‌سازی محلی
+- **Flutter** - UI Framework / Framework UI
+- **Dart** - Programming Language / زبان برنامه‌نویسی  
+- **SharedPreferences** - Local Storage / ذخیره‌سازی محلی
 
-## 📱 نصب و اجرا
+## 📱 نصب و اجرا / Installation & Run
 
 ```bash
 flutter pub get
 flutter run
 ```
+
+---
+
+## 🌍 English
+
+**Mind-Pause** is not just a smoking cessation tool, but a "pause space" for serious engagement with the craving mind. This app doesn't lecture or judge; it simply helps users create a momentary delay between craving and action.
+
+### 🧠 Philosophy
+
+**Habit = Four-stage cycle:** Trigger → Mental Craving → Action → Reward
+
+**Goal:** Break this cycle by creating a "conscious pause"
+
+**Key Principle:** The mind becomes active during cravings and chatters; negotiating with the mind = losing
+
+### ✨ Features
+
+- 📝 **Initial Decision Recording:** User writes down their decision
+- ⏰ **60-Second Timer:** Conscious pause with guiding messages  
+- 🎯 **No Judgment:** The app makes no judgments
+- 📊 **Victory Recording:** Every successful resistance is recorded
+- 📅 **Daily Stats:** Progress display

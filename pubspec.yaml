@@ -1,5 +1,5 @@
-name: joda_az_zehn
-description: "جدا از ذهن - اپلیکیشن کمک به ترک عادت با فلسفه مکث آگاهانه"
+name: mind_pause
+description: "Mind-Pause (جدا از ذهن) - A mindful habit-breaking app based on conscious pause philosophy"
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
