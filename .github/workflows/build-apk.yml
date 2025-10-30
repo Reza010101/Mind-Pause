@@ -37,6 +37,22 @@ jobs:
         with:
           flutter-version: 'stable'
 
+      - name: Network diagnostics
+        run: |
+          echo "== Runner environment =="
+          uname -a || true
+          echo "== Java version =="
+          java -version || true
+          echo "== Gradle wrapper version =="
+          ./gradlew --version || true
+
+          echo "== Check Google Maven (AGP path) =="
+          curl -I -s -o /dev/null -w "%{http_code} %{url_effective}\n" https://dl.google.com/dl/android/maven2/com/android/tools/build/gradle/8.1.4/ || true
+
+          echo "== Check Gradle Plugin Portal (kotlin-dsl) =="
+          curl -I -s -o /dev/null -w "%{http_code} %{url_effective}\n" https://plugins.gradle.org/m2/org/gradle/kotlin/kotlin-dsl/org.gradle.kotlin.kotlin-dsl.gradle.plugin/5.1.2/ || true
+
+
       - name: Flutter doctor
         run: flutter doctor -v
 
